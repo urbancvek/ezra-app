@@ -1,9 +1,11 @@
 // @flow
 import { autobind } from 'core-decorators';
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-
+import { View, StyleSheet } from 'react-native';
 import Camera, { constants } from 'react-native-camera';
+
+import books from 'data/books.json';
+import BookDisplay from 'components/BookDisplay';
 
 @autobind
 class BarCodeReaderScene extends Component {
@@ -11,20 +13,20 @@ class BarCodeReaderScene extends Component {
   camera: Object;
 
   state: State = {
-    scanning: true,
-    readBarCode: null,
+    barCode: null,
   };
 
   onBarCodeRead(barCode: { data: string }) {
-    if (this.state.scanning) {
+    if (!this.state.barCode) {
       this.setState({
-        scanning: false,
-        readBarCode: barCode.data,
+        barCode: barCode.data,
       });
     }
   }
 
   render() {
+    const book = books[this.state.barCode];
+
     return (
       <View style={styles.container}>
         <Camera
@@ -33,15 +35,18 @@ class BarCodeReaderScene extends Component {
           aspect={constants.Aspect.fill}
           onBarCodeRead={this.onBarCodeRead}
         />
-        <Text>{this.state.readBarCode}</Text>
+        <BookDisplay
+          book={book}
+          cancelBook={() => this.setState({ barCode: null })}
+          addBook={() => this.setState({ barCode: null })}
+        />
       </View>
     );
   }
 }
 
 type State = {
-  scanning: boolean,
-  readBarCode: ?string,
+  barCode: ?string,
 };
 
 const styles = StyleSheet.create({
