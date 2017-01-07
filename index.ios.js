@@ -1,15 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry } from 'react-native';
+
+import Root from 'Root';
 
 class Ezra extends Component {
   render() {
     return (
-      <View>
-        <Text>
-          Ezra
-        </Text>
-      </View>
+      <Root />
     );
   }
 }
