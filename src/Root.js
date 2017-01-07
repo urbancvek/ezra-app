@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 
-import BarCodeReaderScene from 'scenes/BarCodeReaderScene';
+import CardSwipingScene from 'scenes/CardSwipingScene';
 
 const Root = () => (
-  <BarCodeReaderScene />
+  <CardSwipingScene />
 );
 
 export default Root;
