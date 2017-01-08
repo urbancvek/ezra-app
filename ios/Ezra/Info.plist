@@ -49,5 +49,12 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Your message to user when the camera is accessed for the first time</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BrandonText-Light.otf</string>
+		<string>BrandonText-Medium.otf</string>
+		<string>BrandonText-Regular.otf</string>
+		<string>BrandonText-Bold.otf</string>
+	</array>
 </dict>
 </plist>
