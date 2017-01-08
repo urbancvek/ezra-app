@@ -5,6 +5,7 @@ import { View, Animated, PanResponder, StyleSheet } from 'react-native';
 import clamp from 'clamp';
 
 import Card from 'components/Card';
+import books from 'data/books.json';
 
 @autobind
 class CardSwipingScene extends Component {
@@ -13,7 +14,7 @@ class CardSwipingScene extends Component {
 
   state: State = {
     pan: new Animated.ValueXY(),
-    books: ['#fff', '#eee', '#ddd'],
+    books: Object.keys(books).map(key => books[key]),
   };
 
   componentWillMount() {
@@ -41,7 +42,7 @@ class CardSwipingScene extends Component {
 
           Animated.decay(this.state.pan, {
             velocity: { x: velocity, y: vy },
-            deceleration: 0.99,
+            deceleration: 0.985,
           }).start(this.resetState);
         } else {
           Animated.spring(this.state.pan, {
@@ -63,7 +64,7 @@ class CardSwipingScene extends Component {
   }
 
   render() {
-    const { pan } = this.state;
+    const { pan, books } = this.state;
 
     const rotate = pan.x.interpolate({
       inputRange: [-200, 0, 200],
@@ -80,16 +81,16 @@ class CardSwipingScene extends Component {
     return (
       <View style={styles.container}>
         <Card
-          color={this.state.books[2]}
           index={2}
+          book={books[2]}
         />
         <Card
-          color={this.state.books[1]}
           index={1}
+          book={books[1]}
         />
         <Card
-          color={this.state.books[0]}
           index={0}
+          book={books[0]}
           animatedStyles={animatedCardStyles}
           {...this.panResponder.panHandlers}
         />
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#c2c598',
   },
 });
 
